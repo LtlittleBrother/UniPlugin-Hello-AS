@@ -17,6 +17,18 @@ buildscript {
 
 allprojects {
     repositories {
+        allprojects {
+            configurations.all {
+                resolutionStrategy {
+                    force 'androidx.startup:startup-runtime:1.0.0'
+                    force 'androidx.core:core:1.6.0'
+                    force 'androidx.fragment:fragment:1.2.0'
+                    force 'androidx.activity:activity:1.2.0'
+                    force 'androidx.media:media:1.2.0'
+                    force 'androidx.appcompat:appcompat:1.2.0'
+                }
+            }
+        }
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
