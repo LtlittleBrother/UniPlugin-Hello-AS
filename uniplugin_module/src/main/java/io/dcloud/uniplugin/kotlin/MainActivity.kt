@@ -7,23 +7,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import com.blankj.utilcode.constant.TimeConstants
-import com.blankj.utilcode.util.TimeUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.github.gzuliyujiang.wheelpicker.DatePicker
-import com.hjq.permissions.Permission
-import com.hjq.permissions.XXPermissions
-import com.luck.picture.lib.basic.PictureSelector
-import com.luck.picture.lib.config.SelectMimeType
-import com.luck.picture.lib.entity.LocalMedia
-import com.luck.picture.lib.interfaces.OnResultCallbackListener
+import com.huantansheng.easyphotos.EasyPhotos
+import com.huantansheng.easyphotos.callback.SelectCallback
+import com.huantansheng.easyphotos.models.album.entity.Photo
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineCallback
 import com.mapbox.android.core.location.LocationEngineResult
@@ -54,11 +50,15 @@ import io.dcloud.uniplugin.kotlin.entity.ClassInfoBean
 import io.dcloud.uniplugin.kotlin.entity.PhotoBean
 import io.dcloud.uniplugin.kotlin.entity.TressTypeBean
 import io.dcloud.uniplugin.kotlin.popup.SelectedTressPopup
+import io.dcloud.uniplugin.kotlin.util.TimeConstants
+import io.dcloud.uniplugin.kotlin.util.TimeUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import uni.dcloud.io.uniplugin_module.R
 import java.lang.ref.WeakReference
 import java.net.URISyntaxException
 import java.util.*
-import uni.dcloud.io.uniplugin_module.R
+
+
 const val SELECTED_CLASS_INFO_CODE = 1
 class MainActivity : FragmentActivity(), View.OnClickListener,
     SelectedTressPopup.OnSelectedTressClickListener, OnItemClickListener,
@@ -186,7 +186,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
         if (mAdapter.itemCount >= 9) {
-            ToastUtils.showShort("最多只能选择9张图片")
+            Toast.makeText(this,"最多只能选择9张图片",LENGTH_SHORT).show()
             return
         }
         selectedImage()
@@ -218,51 +218,50 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         datePicker.setOnDatePickedListener { year, month, day ->
             val time = year.toString().plus("-").plus(month).plus("-").plus(day)
             mSelectedTimeTv.text = time
-            val diffDay = TimeUtils.getTimeSpanByNow(
+            val diffDay = com.blankj.utilcode.util.TimeUtils.getTimeSpanByNow(
                 time,
-                TimeUtils.getSafeDateFormat("yyyy-MM-dd"),
-                TimeConstants.DAY
+                com.blankj.utilcode.util.TimeUtils.getSafeDateFormat("yyyy-MM-dd"),
+                com.blankj.utilcode.constant.TimeConstants.DAY
             )
             mDayTv.text = diffDay.toString().plus("天")
         }
         datePicker.show()
     }
 
+//    private fun selectedTime() {
+//       val pvTime = TimePickerBuilder(this) { date, _ -> //选中事件回调
+//           val time = TimeUtils.date2String(date,"yyyy-MM-dd")
+//           mSelectedTimeTv.text = time
+//           val diffDay = TimeUtils.getTimeSpanByNow(
+//               time,
+//               TimeUtils.getSafeDateFormat("yyyy-MM-dd"),
+//               TimeConstants.DAY
+//           )
+//           mDayTv.text = diffDay.toString().plus("天")
+//        }.build()
+//        pvTime.show()
+//    }
+
     private fun selectedImage() {
-        XXPermissions.with(this)
-            .permission(Permission.WRITE_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)
-            .request { _, all ->
-                val maxSelectedNum = if (mAdapter.getItem(0).type == -1) {
-                    9
-                } else {
-                    9 - mAdapter.itemCount
+        EasyPhotos.createAlbum(this, false,true,
+            GlideEngine.getInstance())
+            .start(object : SelectCallback(){
+                override fun onResult(result: ArrayList<Photo>?, p1: Boolean) {
+                    if (mAdapter.getItem(0).type == -1) {
+                        mAdapter.removeAt(0)
+                    }
+                    result?.forEach {
+                        mAdapter.addData(PhotoBean(1, it.path ?: ""))
+                    }
                 }
-                if (all) {
-                    PictureSelector
-                        .create(this)
-                        .openGallery(SelectMimeType.ofImage())
-                        .setImageEngine(GlideEngine.createGlideEngine())
-                        .setMaxSelectNum(maxSelectedNum)
-                        .forResult(object : OnResultCallbackListener<LocalMedia?> {
-                            override fun onResult(result: ArrayList<LocalMedia?>) {
-                                if (mAdapter.getItem(0).type == -1) {
-                                    mAdapter.removeAt(0)
-                                }
-                                result.forEach {
-                                    mAdapter.addData(PhotoBean(1, it?.path ?: ""))
-                                }
-                            }
 
-                            override fun onCancel() {
+                override fun onCancel() {
 
-                            }
-                        })
                 }
-            }
+            })
     }
 
     private fun initMap() {
-
         mapView.getMapboxMap()?.loadStyleUri(Style.MAPBOX_STREETS)
         mapboxMap = mapView!!.getMapboxMap()
         mapboxMap?.loadStyleUri(

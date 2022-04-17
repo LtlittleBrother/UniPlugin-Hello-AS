@@ -4,10 +4,9 @@
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <ImageView
         android:id="@+id/mTitleTv"
         android:layout_width="0dp"
         android:layout_height="45dp"
@@ -20,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/mCloseIv"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -80,7 +79,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mClassInfo" />
 
 
-            <androidx.appcompat.widget.SwitchCompat
+            <Switch
                 android:id="@+id/mDeadTreeSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -263,7 +262,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mLine3" />
 
-            <androidx.appcompat.widget.SwitchCompat
+            <Switch
                 android:id="@+id/mNearbySwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
