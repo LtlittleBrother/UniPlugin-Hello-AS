@@ -1,7 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uni.dcloud.io.uniplugin_module" >
-<application>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="uni.dcloud.io.uniplugin_module">
+    <uses-sdk tools:overrideLibrary="com.mapbox.maps"/>
+<application
+    android:allowBackup="false"
+    android:supportsRtl="true"
+    tools:replace="android:allowBackup">
 <activity android:name="io.dcloud.uniplugin.NativePageActivity"
-    android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"></activity>
+    android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"/>
+    <activity android:name="io.dcloud.uniplugin.kotlin.MainActivity"/>
+    <activity android:name="io.dcloud.uniplugin.kotlin.activity.SelectedClassActivity"/>
+    <activity android:name="io.dcloud.uniplugin.kotlin.MainActivity2"/>
 </application>
 </manifest>
