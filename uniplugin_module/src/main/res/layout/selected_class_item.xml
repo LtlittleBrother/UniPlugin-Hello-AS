@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mSelectedClass"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    app:layout_constraintTop_toBottomOf="@+id/mTitleTv"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mNumTv"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="46/4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/mLine1"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintStart_toEndOf="@+id/mNumTv"
+        app:layout_constraintTop_toTopOf="@+id/mNumTv"
+        app:layout_constraintBottom_toBottomOf="@+id/mNumTv"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mAddressTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="辽宁省-抚顺市-清苑县-红透山镇-红透山村"
+        app:layout_constraintStart_toEndOf="@+id/mLine1"
+        app:layout_constraintTop_toTopOf="@+id/mNumTv"
+        app:layout_constraintBottom_toBottomOf="@+id/mNumTv"
+        app:layout_constraintEnd_toStartOf="@+id/mLine2"/>
+
+    <View
+        android:id="@+id/mLine2"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/mAddressTv"
+        app:layout_constraintEnd_toStartOf="@+id/mSelectedItem"
+        app:layout_constraintTop_toTopOf="@+id/mLine1"
+        app:layout_constraintBottom_toBottomOf="@+id/mLine1"/>
+
+    <FrameLayout
+        android:id="@+id/mSelectedItem"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/mNumTv"
+        app:layout_constraintBottom_toBottomOf="@+id/mNumTv"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mSelectedTv"
+            android:layout_width="50dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_gravity="center"
+            android:background="@drawable/common_rectangle_purple_r4"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="选择"
+            app:layout_constraintTop_toTopOf="@+id/mNumTv"
+            app:layout_constraintBottom_toBottomOf="@+id/mNumTv"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </FrameLayout>
+
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

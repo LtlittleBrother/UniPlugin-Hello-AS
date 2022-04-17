@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">uniplugin_richAlert</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoid256YzUyMiIsImEiOiJjbDE0YnRvdDUwandyM2xvMDI5c3lqMHFpIn0.awAwYBSd_9LZIdLWT3WiQA</string>
+
+    <string-array name="tress_type_title_array">
+        <item>请选择松树种类</item>
+        <item>未知</item>
+        <item>红松</item>
+        <item>樟子松</item>
+        <item>赤松</item>
+        <item>黑松</item>
+        <item>油松</item>
+        <item>华山松</item>
+        <item>马尾松</item>
+        <item>云南松</item>
+        <item>思茅松</item>
+        <item>高山松</item>
+        <item>湿地松</item>
+        <item>黄山松</item>
+        <item>白皮松</item>
+        <item>雪松</item>
+        <item>落叶松</item>
+        <item>其他</item>
+    </string-array>
+</resources>

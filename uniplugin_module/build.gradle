@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+
+    compileOnly fileTree(dir: '../app/libs', include: ['uniapp-v8-release.aar'])
+
+//    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
+    compileOnly 'androidx.legacy:legacy-support-v4:1.0.0'
+    compileOnly 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.alibaba:fastjson:1.1.46.android'
+    implementation 'com.facebook.fresco:fresco:1.13.0'
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation 'com.github.getActivity:XXPermissions:13.5'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:Common:4.1.7'
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:WheelPicker:4.1.7'
+    implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'
+    implementation 'io.github.scwang90:refresh-header-classics:2.0.5'
+    implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'
+    implementation 'com.blankj:utilcodex:1.31.0'
+    implementation 'io.github.razerdp:BasePopup:3.2.0'
+    implementation 'io.github.lucksiege:pictureselector:v3.0.9'
+    implementation 'com.mapbox.maps:android:10.4.0'
+
+
+    /*implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'*/
+}

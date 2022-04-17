@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mTitleTv"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:background="@color/purple_500"
+        android:gravity="center"
+        android:text="日常监测采集"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/mCloseIv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mTitleTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mTitleTv"
+        app:srcCompat="@drawable/common_start_arrow_icon" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mTitleTv">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.mapbox.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                mapbox:mapbox_cameraTargetLat="40.7128"
+                mapbox:mapbox_cameraTargetLng="-74.0060"
+                mapbox:mapbox_cameraZoom="9.0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mClassInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/common_rectangle_purple_r8"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="小班编号 13，1.25亩，林班编号 00916"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mapView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mDeadTreeTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical"
+                android:text="该小班是否有枯树"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mClassInfo" />
+
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/mDeadTreeSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="20dp"
+                android:text="否"
+                app:layout_constraintBottom_toBottomOf="@+id/mDeadTreeTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mDeadTreeTitleTv"
+                app:switchPadding="10dp" />
+
+            <View
+                android:id="@+id/mLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mDeadTreeTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mResultTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical"
+                android:text="现场监测结果"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mFindSuspicionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="20dp"
+                android:drawableStart="@drawable/common_circle_is_selected_drawable"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="发现疑木"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mResultTitleTv"
+                app:layout_constraintEnd_toStartOf="@+id/mNormalTv"
+                app:layout_constraintTop_toTopOf="@+id/mResultTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mNormalTv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="20dp"
+                android:drawableStart="@drawable/common_circle_is_selected_drawable"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="正常"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mResultTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mResultTitleTv" />
+
+            <View
+                android:id="@+id/mLine1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mResultTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mTreesTypeTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical"
+                android:text="树种"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mSelectedTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/common_rectangle_707070_stroke_drawable"
+                android:drawableEnd="@drawable/common_arrow_bottom_icon"
+                android:drawablePadding="20dp"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:text="请选择松树种类"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mTreesTypeTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mTreesTypeTitleTv" />
+
+            <View
+                android:id="@+id/mLine2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mTreesTypeTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mDistributionTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical"
+                android:text="分布情况"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mPieceDistributionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="20dp"
+                android:drawableStart="@drawable/common_circle_is_selected_drawable"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="片状分布"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mPointDistributionTv"
+                app:layout_constraintEnd_toStartOf="@+id/mPointDistributionTv"
+                app:layout_constraintTop_toTopOf="@+id/mPointDistributionTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mPointDistributionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="20dp"
+                android:drawableStart="@drawable/common_circle_is_selected_drawable"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="点状分布"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mDistributionTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mDistributionTitleTv" />
+
+            <View
+                android:id="@+id/mLine3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mDistributionTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mNearbyTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical"
+                android:text="是否在枯树附件"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine3" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/mNearbySwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="20dp"
+                android:text="否"
+                app:layout_constraintBottom_toBottomOf="@+id/mNearbyTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mNearbyTitleTv"
+                app:switchPadding="10dp" />
+
+            <View
+                android:id="@+id/mLine4"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mNearbyTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mLivePhotosTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:text="现场照片"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLivePhotosTitleTv"
+                app:spanCount="5" />
+
+            <View
+                android:id="@+id/mLine5"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mRecyclerView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mTaskDeadlineTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical"
+                android:text="任务期限"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mSelectedTimeTv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center_vertical|end"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="请选择期限"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:drawableEndCompat="@drawable/common_arrow_right_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/mTaskDeadlineTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/mTaskDeadlineTitleTv"
+                app:layout_constraintTop_toTopOf="@+id/mTaskDeadlineTitleTv" />
+
+            <View
+                android:id="@+id/mLine6"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mTaskDeadlineTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mDayTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical"
+                android:text="任务期限天数"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine6" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mDayTv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center_vertical|end"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mDayTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/mDayTitleTv"
+                app:layout_constraintTop_toTopOf="@+id/mDayTitleTv" />
+
+            <View
+                android:id="@+id/mLine7"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mDayTitleTv" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mRemarkTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:text="备注"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mLine7" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/mRemarkEt"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:padding="@dimen/dp_10"
+                android:gravity="start"
+                android:background="@drawable/common_rectangle_707070_stroke_drawable"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:text="846513"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mRemarkTv" />
+
+            <View
+                android:id="@+id/mLine8"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mRemarkEt" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mOfflineCommitTv"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:textColor="@color/white"
+                android:text="离线提交"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/common_rectangle_purple_r100"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="@dimen/dp_10"
+                app:layout_constraintTop_toBottomOf="@+id/mLine8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/mSaveTv"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mSaveTv"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/common_rectangle_purple_r100"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="20dp"
+                android:text="保存"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/mOfflineCommitTv"
+                app:layout_constraintTop_toTopOf="@+id/mOfflineCommitTv"
+                app:layout_constraintBottom_toBottomOf="@+id/mOfflineCommitTv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
