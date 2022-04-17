@@ -263,7 +263,13 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
 
     private fun initMap() {
         mapView.getMapboxMap()?.loadStyleUri(Style.MAPBOX_STREETS)
-        mapboxMap = mapView!!.getMapboxMap()
+        mapView.setOnTouchListener { v, event ->
+            if (v.id == R.id.mapView){
+                mapView.parent.requestDisallowInterceptTouchEvent(true)
+            }
+            return@setOnTouchListener super.onTouchEvent(event)
+        }
+        mapboxMap = mapView.getMapboxMap()
         mapboxMap?.loadStyleUri(
             Style.MAPBOX_STREETS,
             // After the style is loaded, initialize the Location component.
