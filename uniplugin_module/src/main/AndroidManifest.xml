@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="uni.dcloud.io.uniplugin_module">
-    <uses-sdk tools:overrideLibrary="com.mapbox.maps,com.luck.picture.lib"/>
+    <uses-sdk tools:overrideLibrary="com.mapbox.maps,com.luck.picture.lib,com.mapbox.maps.plugin.compass,com.mapbox.common.core,
+com.mapbox.maps.plugin.gestures,com.mapbox.maps.plugin.viewport,com.mapbox.maps.plugin.annotation,com.mapbox.maps.base,
+com.mapbox.maps.plugin.locationcomponent,com.mapbox.maps.plugin.attribution,com.mapbox.common,com.mapbox.maps.plugin.logo,
+com.mapbox.maps.plugin.camera.animation,com.mapbox.maps.plugin.scalebar,com.mapbox.maps.core,com.mapbox.maps.plugin.lifecycle,
+com.mapbox.maps.extension.localization,com.mapbox.maps.extension.style,com.mapbox.maps.plugin.overlay"/>
 <application
     android:allowBackup="false"
     android:supportsRtl="true"
