@@ -47,7 +47,6 @@ dependencies {
     implementation 'com.github.gzu-liyujiang.AndroidPicker:Common:4.1.7'
     implementation 'com.github.gzu-liyujiang.AndroidPicker:WheelPicker:4.1.7'
     implementation 'com.github.HuanTanSheng:EasyPhotos:3.1.5'
-    implementation('com.mapbox.maps:android:10.4.0')
 
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'
     implementation 'io.github.scwang90:refresh-header-classics:2.0.5'
@@ -58,6 +57,7 @@ dependencies {
     implementation 'io.github.lucksiege:pictureselector:v3.0.9'
     implementation 'com.mapbox.maps:android:10.4.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-core:5.0.0'
+
 
     embed 'io.github.scwang90:refresh-layout-kernel:2.0.5'
     embed 'io.github.scwang90:refresh-header-classics:2.0.5'
