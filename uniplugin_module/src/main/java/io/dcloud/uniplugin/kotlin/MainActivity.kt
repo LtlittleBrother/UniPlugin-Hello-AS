@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.github.gzuliyujiang.wheelpicker.DatePicker
 import com.huantansheng.easyphotos.EasyPhotos
 import com.huantansheng.easyphotos.callback.SelectCallback
 import com.huantansheng.easyphotos.models.album.entity.Photo
@@ -53,6 +52,7 @@ import io.dcloud.uniplugin.kotlin.entity.TressTypeBean
 import io.dcloud.uniplugin.kotlin.popup.SelectedTressPopup
 import io.dcloud.uniplugin.kotlin.util.TimeConstants
 import io.dcloud.uniplugin.kotlin.util.TimeUtils
+import io.dcloud.uniplugin.wheelpicker.DatePicker
 import kotlinx.android.synthetic.main.activity_main.*
 import uni.dcloud.io.uniplugin_module.R
 import java.lang.ref.WeakReference
