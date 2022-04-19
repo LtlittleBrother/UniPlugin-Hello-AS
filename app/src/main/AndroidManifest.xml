@@ -22,7 +22,6 @@
     <!-- Barcode(二维码)  end -->
 
     <application
-        android:name="io.dcloud.application.DCloudApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:icon="@drawable/icon"

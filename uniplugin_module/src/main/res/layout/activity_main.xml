@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <ImageView
         android:id="@+id/mTitleTv"
         android:layout_width="0dp"
@@ -40,17 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <com.mapbox.maps.MapView
-                android:id="@+id/mapView"
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/mMapView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                mapbox:mapbox_cameraTargetLat="40.7128"
-                mapbox:mapbox_cameraTargetLng="-74.0060"
-                mapbox:mapbox_cameraZoom="9.0" />
+                android:clickable="true" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/mClassInfo"
@@ -64,7 +60,7 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapView" />
+                app:layout_constraintTop_toBottomOf="@+id/mMapView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/mDeadTreeTitleTv"
