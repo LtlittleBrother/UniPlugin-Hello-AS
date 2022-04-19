@@ -84,7 +84,8 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
 
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-        SDKInitializer.setAgreePrivacy(this.applicationContext,true)
+        // todo 插件时需打开此行代码 不然报错
+//        SDKInitializer.setAgreePrivacy(this.applicationContext,true)
         SDKInitializer.initialize(this.applicationContext)
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
 

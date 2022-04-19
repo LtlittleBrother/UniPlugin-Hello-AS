@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import io.dcloud.uniplugin.kotlin.adapter.SelectedTressPopupAdapter
 import io.dcloud.uniplugin.kotlin.entity.TressTypeBean
-import razerdp.basepopup.BasePopupWindow
+import io.dcloud.uniplugin.razerdp.basepopup.BasePopupWindow
 import uni.dcloud.io.uniplugin_module.R
 
 class SelectedTressPopup(private val activity: FragmentActivity) : BasePopupWindow(activity),
