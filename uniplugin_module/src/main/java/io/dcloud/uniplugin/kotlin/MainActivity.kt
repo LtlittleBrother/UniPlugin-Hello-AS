@@ -125,6 +125,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         mMapView.setOnTouchListener { v, event ->
             if (v.id == R.id.mMapView){
                 mMapView.parent.requestDisallowInterceptTouchEvent(true)
+                return@setOnTouchListener false
             }
             return@setOnTouchListener super.onTouchEvent(event)
         }
