@@ -1,19 +1,23 @@
 package io.dcloud.uniplugin.kotlin
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
@@ -80,6 +84,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
     var layerList = mutableListOf<String>()
 
     private var markerSelected = false
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -101,26 +106,28 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         mNormalTv.setOnClickListener(this)
         mPieceDistributionTv.setOnClickListener(this)
         mPointDistributionTv.setOnClickListener(this)
-        mSelectedTimeTv.setOnClickListener(this)
+        DeadTreeHasTv.setOnClickListener(this)
+        DeadTreeNoTv.setOnClickListener(this)
+        mNearbyHasTv.setOnClickListener(this)
+        mNearbyNoTv.setOnClickListener(this)
         mClassInfo.setOnClickListener(this)
-        mDeadTreeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            mDeadTreeSwitch.text = if (isChecked) {
-                "是"
-            } else {
-                "否"
-            }
-        }
-        mNearbySwitch.setOnCheckedChangeListener { _, isChecked ->
-            mNearbySwitch.text = if (isChecked) {
-                "是"
-            } else {
-                "否"
-            }
-        }
+
+        setSpanString(mDeadTreeTitleTv)
+        setSpanString(mResultTitleTv)
+        setSpanString(mTreesTypeTitleTv)
+        setSpanString(mDistributionTitleTv)
+        setSpanString(mNearbyTitleTv)
+
         mAdapter.setOnItemChildClickListener(this)
         mAdapter.setOnItemClickListener(this)
         mRecyclerView.adapter = mAdapter
         addEmptyData()
+        mMapView.setOnTouchListener { v, event ->
+            if (v.id == R.id.mMapView){
+                mMapView.parent.requestDisallowInterceptTouchEvent(true)
+            }
+            return@setOnTouchListener super.onTouchEvent(event)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -132,6 +139,22 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
             R.id.mNormalTv -> {
                 mFindSuspicionTv.isSelected = false
                 mNormalTv.isSelected = true
+            }
+            R.id.mNearbyHasTv -> {
+                mNearbyHasTv.isSelected = true
+                mNearbyNoTv.isSelected = false
+            }
+            R.id.mNearbyNoTv -> {
+                mNearbyHasTv.isSelected = false
+                mNearbyNoTv.isSelected = true
+            }
+            R.id.DeadTreeHasTv -> {
+                DeadTreeHasTv.isSelected = true
+                DeadTreeNoTv.isSelected = false
+            }
+            R.id.DeadTreeNoTv -> {
+                DeadTreeHasTv.isSelected = false
+                DeadTreeNoTv.isSelected = true
             }
             R.id.mSelectedTypeTv -> {
                 val popup = SelectedTressPopup(this)
@@ -149,9 +172,9 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
                 mPieceDistributionTv.isSelected = false
                 mPointDistributionTv.isSelected = true
             }
-            R.id.mSelectedTimeTv -> {
-                selectedTime()
-            }
+//            R.id.mSelectedTimeTv -> {
+//                selectedTime()
+//            }
             R.id.mClassInfo -> {
                 launchActivity.launch(Intent(this, SelectedClassActivity::class.java))
             }
@@ -170,9 +193,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         if (view.id == R.id.mDelIv) {
             mAdapter.getItemOrNull(position)?.apply {
                 mAdapter.remove(this)
-                if (mAdapter.itemCount == 0) {
-                    addEmptyData()
-                }
             }
         }
 
@@ -187,19 +207,26 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
     }
 
     private fun selectedTime() {
-        val datePicker = DatePicker(this)
-        datePicker.wheelLayout.setResetWhenLinkage(false)
-        datePicker.setOnDatePickedListener { year, month, day ->
-            val time = year.toString().plus("-").plus(month).plus("-").plus(day)
-            mSelectedTimeTv.text = time
-            val diffDay = com.blankj.utilcode.util.TimeUtils.getTimeSpanByNow(
-                time,
-                com.blankj.utilcode.util.TimeUtils.getSafeDateFormat("yyyy-MM-dd"),
-                com.blankj.utilcode.constant.TimeConstants.DAY
-            )
-            mDayTv.text = diffDay.toString().plus("天")
-        }
-        datePicker.show()
+//        val datePicker = DatePicker(this)
+//        datePicker.wheelLayout.setResetWhenLinkage(false)
+//        datePicker.setOnDatePickedListener { year, month, day ->
+//            val time = year.toString().plus("-").plus(month).plus("-").plus(day)
+//            mSelectedTimeTv.text = time
+//            val diffDay = com.blankj.utilcode.util.TimeUtils.getTimeSpanByNow(
+//                time,
+//                com.blankj.utilcode.util.TimeUtils.getSafeDateFormat("yyyy-MM-dd"),
+//                com.blankj.utilcode.constant.TimeConstants.DAY
+//            )
+//            mDayTv.text = diffDay.toString().plus("天")
+//        }
+//        datePicker.show()
+    }
+
+    private fun setSpanString(textView: TextView){
+        val spanString = SpannableString(textView.text)
+        val span = ForegroundColorSpan(ContextCompat.getColor(this,R.color.color_c30525))
+        spanString.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        textView.text = spanString
     }
 
 //    private fun selectedTime() {
@@ -219,11 +246,9 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
     private fun selectedImage() {
         EasyPhotos.createAlbum(this, false,true,
             GlideEngine.getInstance())
+            .setCount(9)
             .start(object : SelectCallback(){
                 override fun onResult(result: ArrayList<Photo>?, p1: Boolean) {
-                    if (mAdapter.getItem(0).type == -1) {
-                        mAdapter.removeAt(0)
-                    }
                     result?.forEach {
                         mAdapter.addData(PhotoBean(1, it.path ?: ""))
                     }

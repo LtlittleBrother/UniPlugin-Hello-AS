@@ -3,8 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/layout/activity_main.xml" value="0.12132725430597771" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable-xhdpi/common_arrow_bottom_icon.xml" value="0.191" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/common_add_photo_icon.xml" value="0.191" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/common_circle_is_selected_drawable.xml" value="0.191" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/common_is_selected_drawable.xml" value="0.191" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/common_rectangle_707070_stroke_drawable.xml" value="0.191" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/common_rectangle_purple_r100.xml" value="0.176" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/common_rectangle_purple_r8.xml" value="0.191" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/common_rectangle_stroke_ffffff_r12_drawable.xml" value="0.218" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/drawable/main_top_view_drawable.xml" value="0.176" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/layout/dialog_header_style_2.xml" value="0.11614583333333334" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/layout/main_photos_item.xml" value="0.24947916666666667" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/layout/main_selected_tress_popup_item.xml" value="0.24947916666666667" />
+        <entry key="..\:/Android/uni_app/Android-SDK/UniPlugin-Hello-AS/uniplugin_module/src/main/res/layout/main_selected_tress_popup_layout.xml" value="0.24947916666666667" />
       </map>
     </option>
   </component>

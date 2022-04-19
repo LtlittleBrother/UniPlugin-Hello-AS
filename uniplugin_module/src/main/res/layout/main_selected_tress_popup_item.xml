@@ -3,8 +3,8 @@
     android:id="@+id/mItemTv"
     android:layout_width="match_parent"
     android:layout_height="30dp"
-    android:textColor="@color/black"
+    android:textColor="@color/color_2a2a2a"
     android:gravity="center_vertical"
-    android:textSize="15dp"
+    android:textSize="@dimen/sp_14"
     android:paddingStart="15dp"
     android:paddingEnd="15dp"/>
