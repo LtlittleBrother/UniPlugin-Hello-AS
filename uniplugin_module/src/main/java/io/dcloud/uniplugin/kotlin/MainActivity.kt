@@ -93,7 +93,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
 //        SDKInitializer.setAgreePrivacy(this.applicationContext,true)
         SDKInitializer.initialize(this.applicationContext)
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
-
+        Log.d("liutao","jsonString == ${intent?.getStringExtra("json_string")}")
         setContentView(R.layout.activity_main)
         launchActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == SELECTED_CLASS_INFO_CODE){
@@ -207,21 +207,23 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         mSelectedTypeTv.text = item.title
     }
 
-    private fun selectedTime() {
-//        val datePicker = DatePicker(this)
-//        datePicker.wheelLayout.setResetWhenLinkage(false)
-//        datePicker.setOnDatePickedListener { year, month, day ->
-//            val time = year.toString().plus("-").plus(month).plus("-").plus(day)
-//            mSelectedTimeTv.text = time
-//            val diffDay = com.blankj.utilcode.util.TimeUtils.getTimeSpanByNow(
-//                time,
-//                com.blankj.utilcode.util.TimeUtils.getSafeDateFormat("yyyy-MM-dd"),
-//                com.blankj.utilcode.constant.TimeConstants.DAY
-//            )
-//            mDayTv.text = diffDay.toString().plus("天")
-//        }
-//        datePicker.show()
+    private fun jsonData(){
+        for (i in nameList.indices) {
+            val jsonBean = JsonBean()
+            jsonBean.backgroundSourceId = "backgroundSourceId$i"
+            jsonBean.backgroundLayerId = "backgroundLayerId$i"
+            jsonBean.layerId = "layerId$i"
+            jsonBean.sourceId = "sourceId$i"
+            jsonBean.path = "asset://json/${nameList[i]}"
+            jsonList.add(jsonBean)
+            layerList.add(jsonBean.layerId)
+        }
+        for (jsonBean in jsonList) {
+//            initSource(style, jsonBean)
+//            initLayers(style, jsonBean)
+        }
     }
+
 
     private fun setSpanString(textView: TextView){
         val spanString = SpannableString(textView.text)
@@ -229,20 +231,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         spanString.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         textView.text = spanString
     }
-
-//    private fun selectedTime() {
-//       val pvTime = TimePickerBuilder(this) { date, _ -> //选中事件回调
-//           val time = TimeUtils.date2String(date,"yyyy-MM-dd")
-//           mSelectedTimeTv.text = time
-//           val diffDay = TimeUtils.getTimeSpanByNow(
-//               time,
-//               TimeUtils.getSafeDateFormat("yyyy-MM-dd"),
-//               TimeConstants.DAY
-//           )
-//           mDayTv.text = diffDay.toString().plus("天")
-//        }.build()
-//        pvTime.show()
-//    }
 
     private fun selectedImage() {
         EasyPhotos.createAlbum(this, false,true,

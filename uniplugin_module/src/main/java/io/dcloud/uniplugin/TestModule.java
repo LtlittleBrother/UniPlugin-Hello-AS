@@ -47,9 +47,11 @@ public class TestModule extends UniModule {
     }
 
     @UniJSMethod (uiThread = true)
-    public void gotoNativePage(){
+    public void gotoNativePage(String jsonString){
+        Log.d(TAG,"jsonString == " + jsonString);
         if(mUniSDKInstance != null && mUniSDKInstance.getContext() instanceof Activity) {
             Intent intent = new Intent(mUniSDKInstance.getContext(), MainActivity.class);
+            intent.putExtra("json_string",jsonString);
             ((Activity)mUniSDKInstance.getContext()).startActivityForResult(intent, REQUEST_CODE);
         }
     }
