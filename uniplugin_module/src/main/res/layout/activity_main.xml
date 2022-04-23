@@ -44,11 +44,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.baidu.mapapi.map.MapView
-                android:id="@+id/mMapView"
+            <com.mapbox.maps.MapView
+                android:id="@+id/mapView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true" />
+                android:clickable="true"
+                mapbox:mapbox_resourcesAccessToken="@string/mapbox_access_token"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/mBgView"
@@ -61,7 +62,7 @@
                 app:cardElevation="3dp"
                 app:layout_constraintEnd_toStartOf="@+id/mSp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mMapView" />
+                app:layout_constraintTop_toTopOf="@+id/mapView" />
 
             <View
                 android:id="@+id/mView1"
@@ -129,8 +130,8 @@
                 android:layout_marginStart="17dp"
                 android:layout_marginBottom="14dp"
                 android:background="@drawable/main_map_bottom_drawable"
-                app:layout_constraintBottom_toBottomOf="@+id/mMapView"
-                app:layout_constraintStart_toStartOf="@+id/mMapView" />
+                app:layout_constraintBottom_toBottomOf="@+id/mapView"
+                app:layout_constraintStart_toStartOf="@+id/mapView" />
 
             <TextView
                 android:id="@+id/mSelectedClassTv"
@@ -180,7 +181,7 @@
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mMapView" />
+                app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
             <TextView
                 android:id="@+id/mLocation"
