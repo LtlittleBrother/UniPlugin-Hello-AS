@@ -48,10 +48,6 @@
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:clickable="true"
-                mapbox:mapbox_cameraTargetLat="40.7128"
-                mapbox:mapbox_cameraTargetLng="-74.0060"
-                mapbox:mapbox_cameraZoom="9.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -119,7 +115,7 @@
                 app:layout_constraintStart_toEndOf="@+id/mView2"
                 app:layout_constraintTop_toTopOf="@+id/mBgView" />
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:id="@+id/mSp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,7 +151,7 @@
                 app:layout_constraintStart_toStartOf="@+id/mViewBottom"
                 app:layout_constraintTop_toTopOf="@+id/mViewBottom" />
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:id="@+id/mSp2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -229,7 +225,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mLine11" />
 
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:id="@+id/mTopSp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -684,7 +680,7 @@
                 android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@+id/mRemarkEt" />
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:id="@+id/mBottomSp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

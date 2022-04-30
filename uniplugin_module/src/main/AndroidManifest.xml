@@ -17,6 +17,7 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication7"
         tools:replace="android:allowBackup">
         <activity
             android:name="io.dcloud.uniplugin.NativePageActivity"

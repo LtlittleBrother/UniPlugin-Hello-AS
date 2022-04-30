@@ -158,7 +158,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
             }
             return@setOnTouchListener super.onTouchEvent(event)
         }
-        initMap()
+//        initMap()
     }
 
     override fun onClick(v: View?) {
