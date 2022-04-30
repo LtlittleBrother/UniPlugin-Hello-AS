@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.blankj.utilcode.util.LogUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
@@ -62,7 +63,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-const val SELECTED_CLASS_INFO_CODE = 1
+const val SELECTED_CLASS_INFO_CODE = 1*11
 
 class MainActivity : FragmentActivity(), View.OnClickListener,
     SelectedTressPopup.OnSelectedTressClickListener, OnItemClickListener,
@@ -75,7 +76,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         MainPhotoAdapter()
     }
 
-    var mapboxMap: MapboxMap? = null
+    lateinit var mapboxMap: MapboxMap
     lateinit var permissionsManager: PermissionsManager
     var locationEngine: LocationEngine? = null
     private val callback = LocationListeningCallback(this)
@@ -84,7 +85,31 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
     val TAG = "MainActivity"
     val nameList = mutableListOf(
         "210423109001.json",
-        "210423109002.json"
+        "210423109002.json",
+        "210423109003.json",
+        "210423109004.json",
+        "210423109005.json",
+        "210423109006.json",
+        "210423109007.json",
+        "210423109008.json",
+        "210423109009.json",
+        "210423109011.json",
+        "210423109012.json",
+        "210423109013.json",
+        "210423109014.json",
+        "210423109015.json",
+        "210423109016.json",
+        "210423109017.json",
+        "210423109018.json",
+        "210423109019.json",
+        "210423109021.json",
+        "210423109022.json",
+        "210423109023.json",
+        "210423109024.json",
+        "210423109025.json",
+        "210423109026.json",
+        "210423109027.json",
+        "210423109028.json"
     )
     var jsonList = mutableListOf<JsonBean>()
     var layerList = mutableListOf<String>()
@@ -96,9 +121,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ResourceOptionsManager.getDefault(this, getString(R.string.mapbox_access_token)).update {
-            tileStoreUsageMode(TileStoreUsageMode.READ_ONLY)
-        }
         setContentView(R.layout.activity_main)
         launchActivity =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -129,12 +151,14 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         mRecyclerView.adapter = mAdapter
         addEmptyData()
         mapView.setOnTouchListener { v, event ->
+            LogUtils.d("liutao","setOnTouchListener")
             if (v.id == R.id.mapView) {
                 mapView.parent.requestDisallowInterceptTouchEvent(true)
-                return@setOnTouchListener false
+                return@setOnTouchListener true
             }
             return@setOnTouchListener super.onTouchEvent(event)
         }
+        initMap()
     }
 
     override fun onClick(v: View?) {
@@ -183,7 +207,11 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
 //                selectedTime()
 //            }
             R.id.mClassInfo -> {
-                launchActivity.launch(Intent(this, SelectedClassActivity::class.java))
+                try {
+                    launchActivity.launch(Intent(this, SelectedClassActivity::class.java))
+                }catch (e: Exception){
+                    e.printStackTrace()
+                }
             }
         }
     }
@@ -245,38 +273,30 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
 
     private fun initMap() {
 
-        mapView.getMapboxMap()?.loadStyleUri(Style.MAPBOX_STREETS)
-        mapboxMap = mapView!!.getMapboxMap()
-        mapboxMap?.loadStyleUri(
-            Style.MAPBOX_STREETS,
-            // After the style is loaded, initialize the Location component.
-            object : Style.OnStyleLoaded {
-                override fun onStyleLoaded(style: Style) {
-                    mapView?.location?.updateSettings {
-                    }
-                    for (i in nameList.indices) {
-                        val jsonBean = JsonBean()
-                        jsonBean.backgroundSourceId = "backgroundSourceId$i"
-                        jsonBean.backgroundLayerId = "backgroundLayerId$i"
-                        jsonBean.layerId = "layerId$i"
-                        jsonBean.sourceId = "sourceId$i"
-                        jsonBean.path = "asset://json/${nameList[i]}"
-                        jsonList.add(jsonBean)
-                        layerList.add(jsonBean.layerId)
-                    }
-                    for (jsonBean in jsonList) {
-                        initSource(style, jsonBean)
-                        initLayers(style, jsonBean)
-                    }
-
-                }
+        mapboxMap = mapView.getMapboxMap()
+        mapboxMap.loadStyleUri(Style.MAPBOX_STREETS)
+        mapboxMap.loadStyleUri(Style.MAPBOX_STREETS){ style ->
+            mapView?.location?.updateSettings {}
+            for (i in nameList.indices) {
+                val jsonBean = JsonBean()
+                jsonBean.backgroundSourceId = "backgroundSourceId$i"
+                jsonBean.backgroundLayerId = "backgroundLayerId$i"
+                jsonBean.layerId = "layerId$i"
+                jsonBean.sourceId = "sourceId$i"
+                jsonBean.path = "asset://json/${nameList[i]}"
+                jsonList.add(jsonBean)
+                layerList.add(jsonBean.layerId)
             }
-        )
+            for (jsonBean in jsonList) {
+                initSource(style, jsonBean)
+                initLayers(style, jsonBean)
+            }
+        }
 
-        mapboxMap?.getStyle() {
+        mapboxMap.getStyle() {
             it.localizeLabels(Locale.CHINESE)
         }
-        mapboxMap?.setCamera(
+        mapboxMap.setCamera(
             CameraOptions.Builder()
 //                .center(Point.fromLngLat(124.86345178, 42.21473639))
 //                .center(Point.fromLngLat(-121.37881303595779, 38.39168793390614))
@@ -288,12 +308,12 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
                 .zoom(15.0)
                 .build()
         )
-        mapboxMap?.addOnMapClickListener(object : OnMapClickListener {
+        mapboxMap.addOnMapClickListener(object : OnMapClickListener {
             override fun onMapClick(point: Point): Boolean {
-                mapboxMap?.getStyle() {
-                    val pixel = mapboxMap?.pixelForCoordinate(point)
-                    mapboxMap?.queryRenderedFeatures(
-                        RenderedQueryGeometry(screenBoxFromPixel(pixel!!)),
+                mapboxMap.getStyle() {
+                    val pixel = mapboxMap.pixelForCoordinate(point)
+                    mapboxMap.queryRenderedFeatures(
+                        RenderedQueryGeometry(screenBoxFromPixel(pixel)),
                         RenderedQueryOptions(layerList, null)
                     ) { expected: Expected<String, MutableList<QueriedFeature>> ->
                         if (expected.value!!.isNotEmpty() && markerSelected) {
@@ -301,13 +321,13 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
                         }
                         val queriedFeatures = expected.value!!
                         for (jsonBean in jsonList) {
-                            it.getSourceAs<GeoJsonSource>(jsonBean.backgroundSourceId)!!.apply {
+                            it.getSourceAs<GeoJsonSource>(jsonBean.backgroundSourceId)?.apply {
                                 if (queriedFeatures.size > 0) {
-                                    feature(queriedFeatures[0].feature!!)
-//                                Toast.makeText(this@MainActivity, queriedFeatures[0].feature.properties()?.get("xb_code").toString(), Toast.LENGTH_SHORT).show()
+                                    feature(queriedFeatures[0].feature)
+                        //                                Toast.makeText(this@MainActivity, queriedFeatures[0].feature.properties()?.get("xb_code").toString(), Toast.LENGTH_SHORT).show()
                                     backgroundFillLayerLayer?.visibility(Visibility.VISIBLE)
                                 } else {
-//                                backgroundFillLayerLayer?.visibility(Visibility.NONE)
+                        //                                backgroundFillLayerLayer?.visibility(Visibility.NONE)
                                 }
                             }
                         }
@@ -348,13 +368,12 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
         backgroundFillLayerLayer?.visibility(Visibility.NONE)
         loadedMapStyle.addLayer(backgroundFillLayerLayer!!)
 
-        var fillLayer = FillLayer(jsonBean.layerId, jsonBean.sourceId)
+        val fillLayer = FillLayer(jsonBean.layerId, jsonBean.sourceId)
         fillLayer.fillColor(Color.BLACK)
         fillLayer.fillOpacity(0.4)
         loadedMapStyle.addLayerBelow(fillLayer, jsonBean.backgroundLayerId)
 
     }
-
 
     private fun screenBoxFromPixel(pixel: ScreenCoordinate) = ScreenBox(
         ScreenCoordinate(pixel.x - 25.0, pixel.y - 25.0),
@@ -372,62 +391,67 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
 
     override fun onStart() {
         super.onStart()
-        mapView?.onStart()
+        mapView.onStart()
     }
 
     override fun onStop() {
         super.onStop()
-        mapView?.onStop()
+        mapView.onStop()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView?.onLowMemory()
+        mapView.onLowMemory()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView?.onDestroy()
+        mapView.onDestroy()
     }
 
 
-    fun drowView(result: LocationEngineResult) {
-        var latitude = result.lastLocation?.latitude
-        var longitude = result.lastLocation?.longitude
+    @OptIn(MapboxExperimental::class)
+    fun drawView(result: LocationEngineResult) {
+        val latitude = result.lastLocation?.latitude
+        val longitude = result.lastLocation?.longitude
         // Create an instance of the Annotation API and get the polygon manager.
         val annotationApi = mapView?.annotations
         val polygonAnnotationManager = annotationApi?.createPolygonAnnotationManager(mapView!!)
-// Define a list of geographic coordinates to be connected.
-        val points = listOf(
-            listOf(
-                Point.fromLngLat(longitude?.minus(0.0005)!!, latitude?.minus(0.0005)!!),
-                Point.fromLngLat(longitude?.minus(0.0005)!!, latitude?.plus(0.0005)!!),
-                Point.fromLngLat(longitude?.plus(0.0005)!!, latitude?.plus(0.0005)!!),
-                Point.fromLngLat(longitude?.plus(0.0015)!!, latitude?.plus(0.0015)!!),
-                Point.fromLngLat(longitude?.plus(0.0005)!!, latitude?.minus(0.0005)!!),
-                Point.fromLngLat(longitude?.minus(0.0005)!!, latitude?.minus(0.0005)!!)
+        longitude?.also {
+            // Define a list of geographic coordinates to be connected.
+            val points = listOf(
+                listOf(
+                    Point.fromLngLat(it.minus(0.0005), it.minus(0.0005)),
+                    Point.fromLngLat(it.minus(0.0005), it.plus(0.0005)),
+                    Point.fromLngLat(it.plus(0.0005), it.plus(0.0005)),
+                    Point.fromLngLat(it.plus(0.0015), it.plus(0.0015)),
+                    Point.fromLngLat(it.plus(0.0005), it.minus(0.0005)),
+                    Point.fromLngLat(it.minus(0.0005), it.minus(0.0005))
+                )
             )
-        )
 // Set options for the resulting fill layer.
-        val polygonAnnotationOptions: PolygonAnnotationOptions = PolygonAnnotationOptions()
-            .withPoints(points)
-            // Style the polygon that will be added to the map.
-            .withFillColor("#ee4e8b")
-            .withFillOpacity(0.4)
+            val polygonAnnotationOptions: PolygonAnnotationOptions = PolygonAnnotationOptions()
+                .withPoints(points)
+                // Style the polygon that will be added to the map.
+                .withFillColor("#ee4e8b")
+                .withFillOpacity(0.4)
 // Add the resulting polygon to the map.
-        polygonAnnotationManager?.create(polygonAnnotationOptions)
+            polygonAnnotationManager?.create(polygonAnnotationOptions)
 
-        val viewportPlugin = mapView?.viewport
-        val overviewViewportState: OverviewViewportState =
-            viewportPlugin!!.makeOverviewViewportState(
-                OverviewViewportStateOptions.Builder()
-                    .geometry(Point.fromLngLat(124.51698126, 42.23875025))
-                    .padding(EdgeInsets(200.0, 200.0, 200.0, 200.0))
-                    .build()
-            )
-        val immediateTransition = viewportPlugin?.makeImmediateViewportTransition()
-        viewportPlugin?.transitionTo(overviewViewportState, immediateTransition) { success ->
-            // the transition has been completed with a flag indicating whether the transition succeeded
+            val viewportPlugin = mapView?.viewport
+            viewportPlugin?.also { plugin ->
+                val overviewViewportState: OverviewViewportState =
+                    plugin.makeOverviewViewportState(
+                        OverviewViewportStateOptions.Builder()
+                            .geometry(Point.fromLngLat(124.51698126, 42.23875025))
+                            .padding(EdgeInsets(200.0, 200.0, 200.0, 200.0))
+                            .build()
+                    )
+                val immediateTransition = plugin.makeImmediateViewportTransition()
+                plugin.transitionTo(overviewViewportState, immediateTransition) { success ->
+                    // the transition has been completed with a flag indicating whether the transition succeeded
+                }
+            }
         }
     }
 
@@ -444,7 +468,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener,
             if (isLocation) {
                 isLocation = false
                 result.lastLocation
-                drowView(result)
+                drawView(result)
             }
         }
 

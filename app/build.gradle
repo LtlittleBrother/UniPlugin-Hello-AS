@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "uni.UNICAA3511"
         minSdkVersion 21
-        targetSdkVersion 26 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
+        targetSdkVersion 30 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
 
         versionCode 1
         versionName "1.0"
@@ -60,6 +60,13 @@ android {
         pickFirst 'lib/x86_64/libBaiduMapSDK_map_v7_4_0.so'
         pickFirst 'lib/x86/libBaiduMapSDK_map_v7_4_0.so'
 
+        pickFirst 'lib/armeabi/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+
+        pickFirst 'lib/x86_64/libBaiduMapSDK_map_v7_4_0.so'
         pickFirst 'lib/armeabi/liblocSDK8a.so'
         pickFirst 'lib/armeabi-v7a/liblocSDK8a.so'
         pickFirst 'lib/arm64-v8a/liblocSDK8a.so'
@@ -78,7 +85,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.aar'])
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
 
     /*uniapp所需库-----------------------开始*/
     implementation 'androidx.recyclerview:recyclerview:1.2.1'

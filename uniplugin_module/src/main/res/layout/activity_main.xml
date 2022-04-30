@@ -32,13 +32,13 @@
         app:layout_constraintTop_toTopOf="@+id/mTitleTv"
         app:srcCompat="@drawable/common_arror_left_icon" />
 
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/mTitleTv">-->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mTitleTv">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -47,9 +47,14 @@
             <com.mapbox.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:clickable="true"
-                mapbox:mapbox_resourcesAccessToken="@string/mapbox_access_token"/>
+                mapbox:mapbox_cameraTargetLat="40.7128"
+                mapbox:mapbox_cameraTargetLng="-74.0060"
+                mapbox:mapbox_cameraZoom="9.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/mBgView"
@@ -721,7 +726,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    </androidx.core.widget.NestedScrollView>-->
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.kezong.fat-aar'
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -43,14 +43,16 @@ dependencies {
 
 //    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
     compileOnly 'androidx.legacy:legacy-support-v4:1.0.0'
-    compileOnly 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+
     implementation 'com.alibaba:fastjson:1.1.46.android'
     implementation 'com.facebook.fresco:fresco:1.13.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.github.bumptech.glide:glide:4.13.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.github.HuanTanSheng:EasyPhotos:3.1.5'
 
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'
@@ -63,43 +65,11 @@ dependencies {
 
     implementation 'com.mapbox.maps:android:10.4.0'
 
-    embed 'com.mapbox.base:common:0.5.0'
+    implementation 'com.blankj:utilcodex:1.31.0'
 
-    embed 'com.mapbox.common:common:21.2.0'
-    embed 'com.mapbox.common:okhttp:21.2.0'
-
-    embed 'com.mapbox.extension:maps-localization:10.4.0'
-    embed 'com.mapbox.extension:maps-style:10.4.0'
-
-    embed 'com.mapbox.mapboxsdk:mapbox-android-core:5.0.0'
-    embed 'com.mapbox.mapboxsdk:mapbox-android-gestures:0.7.0'
-    embed 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:5.4.1'
-
-    embed 'com.mapbox.maps:android:10.4.0'
-    embed 'com.mapbox.maps:android-core:10.4.0'
-    embed 'com.mapbox.maps:base:10.4.0'
-
-    embed 'com.mapbox.plugin:maps-animation:10.4.0'
-    embed 'com.mapbox.plugin:maps-annotation:10.4.0'
-    embed 'com.mapbox.plugin:maps-attribution:10.4.0'
-    embed 'com.mapbox.plugin:maps-compass:10.4.0'
-    embed 'com.mapbox.plugin:maps-gestures:10.4.0'
-    embed 'com.mapbox.plugin:maps-lifecycle:10.4.0'
-    embed 'com.mapbox.plugin:maps-locationcomponent:10.4.0'
-    embed 'com.mapbox.plugin:maps-logo:10.4.0'
-    embed 'com.mapbox.plugin:maps-overlay:10.4.0'
-    embed 'com.mapbox.plugin:maps-scalebar:10.4.0'
-    embed 'com.mapbox.plugin:maps-viewport:10.4.0'
-
-
-    embed 'io.github.scwang90:refresh-layout-kernel:2.0.5'
-    embed 'io.github.scwang90:refresh-header-classics:2.0.5'
-    embed 'io.github.scwang90:refresh-footer-classics:2.0.5'
-    embed 'com.blankj:utilcodex:1.31.0'
-
-    embed 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
-    embed 'io.github.lucksiege:pictureselector:v3.0.9'
-    embed 'com.github.HuanTanSheng:EasyPhotos:3.1.5'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
+    implementation 'io.github.lucksiege:pictureselector:v3.0.9'
+    implementation 'com.github.HuanTanSheng:EasyPhotos:3.1.5'
 
     implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9')
 

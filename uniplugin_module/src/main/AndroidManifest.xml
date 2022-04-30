@@ -2,27 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="uni.dcloud.io.uniplugin_module">
 
-    <uses-sdk tools:overrideLibrary="com.luck.picture.lib,
-    com.mapbox.maps,
-    com.mapbox.maps.core,
-    com.mapbox.maps.plugin.compass,
-    com.mapbox.common.core,
-    com.mapbox.maps.plugin.gestures,
-    com.mapbox.maps.plugin.viewport,
-    com.mapbox.maps.plugin.annotation,
-    com.mapbox.common.module.okhttp,
-    com.mapbox.maps.base,
-    com.mapbox.maps.plugin.locationcomponent,
-    com.mapbox.maps.plugin.attribution,
-    com.mapbox.common,
-    com.mapbox.maps.plugin.logo,
-    com.mapbox.maps.plugin.camera.animation,
-    com.mapbox.maps.plugin.scalebar,
-    com.mapbox.maps.plugin.lifecycle,
-    com.mapbox.maps.extension.localization,
-    com.mapbox.maps.extension.style,
-    com.mapbox.maps.plugin.overlay" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -46,16 +25,5 @@
         <activity android:name="io.dcloud.uniplugin.kotlin.activity.SelectedClassActivity" />
         <activity android:name="io.dcloud.uniplugin.kotlin.MainActivity2" />
 
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="ZDT4YRRmn1xf3Hk3mUms0ww7zmqSMkii" />
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-        <provider
-            android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove" />
     </application>
 </manifest>
